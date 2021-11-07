@@ -1,3 +1,13 @@
+### Naming
+
+According to the Go documentation:
+
+> "Names are as important in Go as in any other language. They even have semantic effect: the visibility of a name outside a package is determined by whether its first character is upper case."
+
+In terms of casing, Go prefers mixed casing to determine multi-word names rather than underscores or hyphens.
+
+For more detail, visit [the documentation](https://golang.org/doc/effective_go#names)
+
 ### Project Structure
 
 #### Modules vs Packages
@@ -19,7 +29,6 @@ module go_playground/hello
 
 This is typically a place where Go's import tools can reach the module, such as a GitHub repository.
 
-## TODO: importing by path from private repo
 
 #### Basic Project File Structure
 
@@ -65,6 +74,8 @@ pattern like this:
 ```
 
 ### Package Management
+
+## TODO: importing by path from private repo
 
 #### Setting Up Project for Package Management
 
