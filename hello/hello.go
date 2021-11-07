@@ -5,7 +5,7 @@ import (
 	"log"
 
 	"go_playground/greetings_multiple"
-	"go_playground/hello/local_package"
+	"go_playground/hello/second_local_package"
 )
 
 func main() {
@@ -20,5 +20,6 @@ func main() {
 	}
 	fmt.Println(message)
 
-	local_package.Print("this is a message")
+	response := second_local_package.PrintFromLocalPackage("this is a message")
+	fmt.Println(response)
 }

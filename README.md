@@ -5,8 +5,7 @@
 Go programs are organized into packages, which are then organized further into modules. A package is a collection of
 files in the same directory that get compiled together. Packages can then be imported from anywhere within a module.
 
-Modules are collections of related packages that get released
-together.
+Modules are collections of related packages that get released together.
 
 In terms of our `/web` directory, the `/ui`, `/tests`, and `/public` directories would all be *packages*, while
 the `/web` root directory is a `module`.
@@ -26,19 +25,46 @@ This is typically a place where Go's import tools can reach the module, such as 
 
 ```
 - module_name
-    \_ go.mod //module config file
-    \_ go.sum //dependency list
-    \_ main.go //package named main that lives at the root
+    \_ go.mod
+    \_ go.sum
+    \_ main.go
     \_ package_name
         \_ package_name.go
+    \_ second_package
+        \_ second_package.go
 ```
 
 * `go.mod` - module config file that declares module name, imports, and other things
 * `go.sum` - dependency list
 * `main.go` - package named `main` that lives at module root and is the executable when `go run .` is called.
 
-### Package Management
+#### Complex Project Structure
 
+As the number of packages, entry point files, and private files increase, it can be helpful to expand the structure to
+subdirectories. [Many articles](https://www.wolfe.id.au/2020/03/10/how-do-i-structure-my-go-project/) recommend a
+pattern like this:
+
+```
+- module_name
+    \_ go.mod
+    \_ go.sum
+    \_ cmd
+        \_ file_name
+            \_ main.go
+        \_ second_file_name
+            \_ main.go
+    \_ pkg
+        \_ package_name
+            \_ package_name.go
+        \_ second_package
+            \_ second_package.go
+    \_ internal
+        \_ private_name
+            \_ ...
+        \_ second_private_name
+```
+
+### Package Management
 
 #### Setting Up Project for Package Management
 
@@ -53,7 +79,13 @@ Here's [a quick guide](https://golang.org/doc/modules/managing-dependencies#nami
 
 #### Using Internal Packages
 
+Any packages in a module can be imported by other packages in the module. To import a local package, you can use the
+module's file path as declared in the `go.mod` file. For instance, if the `go.mod` is listed
+as `module example.com/module`, then you can import a package like this:
 
+```gotemplate
+import "example.com/module/local_package"
+```
 
 #### Downloading External Packages for Your Project
 
@@ -160,3 +192,25 @@ executable. When you want to create that binary executable, you must use one of 
     ```shell
       go install
     ```
+
+### Websockets in Go
+
+While Go has its own websocket library, the external package from Gorilla has an active community and provides a more
+pleasant developer experience. The documentation can be
+found [here](https://pkg.go.dev/github.com/gorilla/websocket#pkg-overview).
+
+To install the package, you must do the following:
+
+1. Install the package by downloading it in the target directory with this command:
+
+```shell
+go get github.com/gorilla/websocket
+```
+
+2. Import the package in your file
+
+```gotemplate
+// main.go
+import "github.com/gorilla/websocket"
+```
+
