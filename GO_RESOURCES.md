@@ -7,3 +7,9 @@
     The module path is typically of the following form:
 
     `<prefix>/<descriptive-text>`
+
+* [Redis in Go](https://github.com/go-redis/redis)
+* [Postgres in Go](https://bun.uptrace.dev/postgres/#pgdriver)
+* [Logging in Go](https://www.datadoghq.com/blog/go-logging/#use-logrus-for-formatted-logs)
+* [Websockets in Go](https://github.com/gorilla/websocket/)
+* [Time in Go](https://pkg.go.dev/time)
